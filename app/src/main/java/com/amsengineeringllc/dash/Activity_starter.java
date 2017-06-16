@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.openxc.VehicleManager;
 import com.openxc.measurements.EngineSpeed;
+import com.openxc.measurements.VehicleSpeed;
 import com.openxc.measurements.Measurement;
 import com.sccomponents.widgets.ScArcGauge;
 import com.sccomponents.widgets.ScCopier;
@@ -41,6 +42,7 @@ public class Activity_starter extends AppCompatActivity {
 
     private VehicleManager mVehicleManager;
     private TextView mEngineSpeedView;
+    private TextView vSpeedView;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -119,6 +121,7 @@ public class Activity_starter extends AppCompatActivity {
         setContentView(R.layout.activity_starter);
 
         mEngineSpeedView = (TextView) findViewById(R.id.counter);
+        vSpeedView = (TextView) findViewById(R.id.counter2);
 
         // Find the components
         final ScArcGauge gauge = (ScArcGauge) this.findViewById(R.id.gauge);
@@ -272,6 +275,29 @@ public class Activity_starter extends AppCompatActivity {
         }
     };
 
+    VehicleSpeed.Listener vSpeedListener = new EngineSpeed.Listener() {
+        @Override
+        public void receive(Measurement measurement) {
+            // When we receive a new EngineSpeed value from the car, we want to
+            // update the UI to display the new value. First we cast the generic
+            // Measurement back to the type we know it to be, an EngineSpeed.
+            final VehicleSpeed speed = (VehicleSpeed) measurement;
+            // In order to modify the UI, we have to make sure the code is
+            // running on the "UI thread" - Google around for this, it's an
+            // important concept in Android.
+            Activity_starter.this.runOnUiThread(new Runnable() {
+                public void run() {
+                    // Finally, we've got a new value and we're running on the
+                    // UI thread - we set the text of the EngineSpeed view to
+                    // the latest value
+                    vSpeedView.setText(""
+                            + speed.getValue().intValue());
+                }
+            });
+        }
+    };
+
+
     private ServiceConnection mConnection = new ServiceConnection() {
         // Called when the connection with the VehicleManager service is
         // established, i.e. bound.
@@ -289,6 +315,7 @@ public class Activity_starter extends AppCompatActivity {
             // we request that the VehicleManager call its receive() method
             // whenever the EngineSpeed changes
             mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
+            mVehicleManager.addListener(VehicleSpeed.class, vSpeedListener);
         }
 
         // Called when the connection with the service disconnects unexpectedly

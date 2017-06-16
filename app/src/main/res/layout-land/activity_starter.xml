@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/counter2"
                 android:textColor="#787b80"
-                android:textSize="80dp"
+                android:textSize="100dp"
                 android:textStyle="bold"
                 android:text="0"
                 android:gravity="center"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#b6c2d5"
                 android:textSize="20dp"
-                android:text="MPH"
+                android:text="KPH"
                 android:gravity="center"
                 />
 
