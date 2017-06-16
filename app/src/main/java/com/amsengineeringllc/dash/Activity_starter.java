@@ -265,8 +265,8 @@ public class Activity_starter extends AppCompatActivity {
                     // Finally, we've got a new value and we're running on the
                     // UI thread - we set the text of the EngineSpeed view to
                     // the latest value
-                    mEngineSpeedView.setText("Engine speed (RPM): "
-                            + speed.getValue().doubleValue());
+                    mEngineSpeedView.setText(""
+                            + speed.getValue().intValue());
                 }
             });
         }
