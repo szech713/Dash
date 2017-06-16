@@ -29,5 +29,4 @@ dependencies {
     compile 'com.github.paroca72:sc-widgets:2.2.0'
     compile 'com.openxcplatform:library:6.1.6+'
     testCompile 'junit:junit:4.12'
-    compile project(':library')
 }
