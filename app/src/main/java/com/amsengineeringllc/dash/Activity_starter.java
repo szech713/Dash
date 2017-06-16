@@ -20,6 +20,9 @@ import com.sccomponents.widgets.ScWriter;
 
 import java.util.Random;
 
+
+
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -132,7 +135,7 @@ public class Activity_starter extends AppCompatActivity {
         progress.setPosition(ScNotches.NotchPositions.INSIDE);
 
         // Set the value
-        gauge.setHighValue(1300, 0, 16000);
+        gauge.setHighValue(15500, 0, 16000);
 
         // Each time I will change the value I must write it inside the counter text.
         gauge.setOnEventListener(new ScGauge.OnEventListener() {
